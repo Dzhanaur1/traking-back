@@ -22,17 +22,16 @@ class ContactController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
         ];
-
         Mail::send([], [], function ($message) use ($emailData) {
-            $message->to('3923328@gmail.com')
-                ->subject('New Contact Form Submission')
-                ->setBody('Name: ' . $emailData['name'] . "\nPhone: " . $emailData['phone'] . "\nEmail: " . $emailData['email']);
+            $message->to('ssoraxx@gmail.com')
+                    ->subject('Новая заявка')
+                    ->text('Имя: ' . $emailData['name'] . "\nТелефон: " . $emailData['phone'] . "\nПочта: " . $emailData['email']);
         });
 
         // Отправка сообщения в Telegram
         $telegramToken = '7488705773:AAH1Lrw9g_QkJVV5HLdH5NcGncNTOSEphbs';
         $chatId = '926348939';
-        $message = 'Name: ' . $request->name . "\nPhone: " . $request->phone . "\nEmail: " . $request->email;
+        $message = 'Имя: ' . $request->name . "\nТелефон: " . $request->phone . "\nПочта: " . $request->email;
 
         $telegramUrl = "https://api.telegram.org/bot{$telegramToken}/sendMessage";
         $telegramResponse = Http::post($telegramUrl, [
@@ -40,6 +39,6 @@ class ContactController extends Controller
             'text' => $message,
         ]);
 
-        return response()->json(['message' => 'Form submitted successfully']);
+        return response()->json(['message' => 'Форма отправилась успешно']);
     }
 }

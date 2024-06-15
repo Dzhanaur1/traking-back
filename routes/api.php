@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TransportTypeController;
 use App\Http\Middleware\AdminMiddleware;
@@ -23,7 +24,7 @@ Route::post('registration', [AuthController::class, 'register']);
 Route::get('logout', [AuthController::class, 'logout']);
 Route::post('order/create', [OrderController::class, 'create']);
 Route::get('/transport-types', [TransportTypeController::class, 'index']);
-
+Route::post('/send', [ContactController::class, 'send']);
 Route::middleware(AdminMiddleware::class)->group(function(){
     Route::get('admin', [OrderController::class, 'show']);
     Route::delete('order/delete/{id}', [OrderController::class, 'destroy']);
