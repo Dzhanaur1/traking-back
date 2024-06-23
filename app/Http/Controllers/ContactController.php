@@ -23,7 +23,7 @@ class ContactController extends Controller
             'email' => $request->email,
         ];
         Mail::send([], [], function ($message) use ($emailData) {
-            $message->to('ssoraxx@gmail.com')
+            $message->to('ssoraxx@gmail.com') //Поменяйте на вашу почту
                     ->subject('Новая заявка')
                     ->text('Имя: ' . $emailData['name'] . "\nТелефон: " . $emailData['phone'] . "\nПочта: " . $emailData['email']);
         });
